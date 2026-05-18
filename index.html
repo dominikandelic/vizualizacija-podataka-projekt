@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEET stopa mladih u Europi</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Vizualizacija podataka</p>
+        <h1>NEET stopa mladih u Europi</h1>
+        <p class="lead">
+          Interaktivni prikaz mladih koji nisu zaposleni niti sudjeluju u obrazovanju ili osposobljavanju.
+        </p>
+      </div>
+      <div class="source-card">
+        <span>Izvor</span>
+        <strong>Eurostat TESEM150</strong>
+        <a href="https://ec.europa.eu/eurostat/databrowser/product/page/TESEM150" target="_blank" rel="noreferrer">
+          otvoriti skup podataka
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="Kontrole prikaza">
+        <label>
+          Dobna skupina
+          <select id="ageSelect">
+            <option value="Y15-29">15-29 godina</option>
+            <option value="Y15-24">15-24 godine</option>
+          </select>
+        </label>
+
+        <label>
+          Spol
+          <select id="sexSelect">
+            <option value="T">Ukupno</option>
+            <option value="F">Žene</option>
+            <option value="M">Muškarci</option>
+          </select>
+        </label>
+
+        <label>
+          Sortiranje država
+          <select id="sortSelect">
+            <option value="desc">Najviša NEET stopa</option>
+            <option value="asc">Najniža NEET stopa</option>
+            <option value="alpha">Abecedno</option>
+            <option value="change">Najveća promjena od 2005.</option>
+          </select>
+        </label>
+
+        <label class="year-control">
+          Godina: <strong id="yearLabel">2024</strong>
+          <input id="yearSlider" type="range" min="2005" max="2025" step="1" value="2024" />
+        </label>
+
+        <button id="playButton" type="button" aria-pressed="false">Pokreni animaciju</button>
+      </section>
+
+      <section class="summary-strip" aria-label="Sažetak odabranih vrijednosti">
+        <article>
+          <span>Hrvatska</span>
+          <strong id="croatiaMetric">-</strong>
+        </article>
+        <article>
+          <span>EU-27</span>
+          <strong id="euMetric">-</strong>
+        </article>
+        <article>
+          <span>Razlika HR - EU</span>
+          <strong id="gapMetric">-</strong>
+        </article>
+        <article>
+          <span>Odabrano za usporedbu</span>
+          <strong id="selectedMetric">-</strong>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel map-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Karta Europe</p>
+              <h2>Prostorna raspodjela NEET stope</h2>
+            </div>
+            <p id="mapHint">Boja prikazuje vrijednost u odabranoj godini. Klik na državu dodaje je u usporedbu.</p>
+          </div>
+          <svg id="mapChart" role="img" aria-label="Karta Europe s NEET stopom po državama"></svg>
+          <div id="mapLegend" class="map-legend" aria-label="Legenda karte"></div>
+        </article>
+
+        <article class="panel ranking-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Rangiranje</p>
+              <h2>Usporedba država u odabranoj godini</h2>
+            </div>
+            <p id="barHint">Klik na stupac dodaje ili miče državu iz usporedbe.</p>
+          </div>
+          <svg id="barChart" role="img" aria-label="Stupčasti grafikon NEET stope po državama"></svg>
+        </article>
+
+        <article class="panel trend-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Trend</p>
+              <h2>Kretanje kroz vrijeme</h2>
+            </div>
+            <div id="legend" class="legend" aria-label="Legenda odabranih država"></div>
+          </div>
+          <svg id="lineChart" role="img" aria-label="Linijski grafikon odabranih država kroz godine"></svg>
+        </article>
+
+        <article class="panel gender-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Struktura</p>
+              <h2>Usporedba prema spolu</h2>
+            </div>
+            <p id="genderHint">Prikaz se mijenja prema odabranim državama i godini.</p>
+          </div>
+          <svg id="genderChart" role="img" aria-label="Grupirani stupčasti grafikon po spolu"></svg>
+        </article>
+
+        <aside class="panel notes-panel">
+          <p class="eyebrow">Tumačenje</p>
+          <h2 id="insightTitle">Hrvatska u odnosu na EU</h2>
+          <p id="insightText"></p>
+          <div id="countryList" class="country-list"></div>
+        </aside>
+      </section>
+    </main>
+
+    <div id="tooltip" class="tooltip" hidden></div>
+
+    <script src="vendor/d3.v7.min.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>
