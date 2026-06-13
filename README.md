@@ -8,7 +8,7 @@ Podaci su preuzeti iz Eurostat skupa TESEM150:
 
 https://ec.europa.eu/eurostat/databrowser/product/page/TESEM150
 
-Lokalno su spremljene dvije datoteke:
+Lokalno su spremljene četiri datoteke:
 
 - `data/eurostat_tesem150_raw.json` - izvorni odgovor Eurostat API-ja
 - `data/neet.json` - obrađeni podaci koje koristi D3 aplikacija
